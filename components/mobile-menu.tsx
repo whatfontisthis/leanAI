@@ -5,7 +5,12 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function MobileMenu() {
+interface MobileMenuProps {
+  onLoginClick: () => void;
+  onSignupClick: () => void;
+}
+
+export function MobileMenu({ onLoginClick, onSignupClick }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -30,17 +35,17 @@ export function MobileMenu() {
               프로세스
             </Link>
             <Link href="#case-studies" className="text-sm text-foreground">
-              사례연구
+              성공사례
             </Link>
             <Link href="#about" className="text-sm text-foreground">
               회사소개
             </Link>
             <div className="flex gap-2 pt-4">
-              <Button variant="ghost" size="sm" className="flex-1">
+              <Button variant="ghost" size="sm" className="flex-1" onClick={onLoginClick}>
                 로그인
               </Button>
-              <Button size="sm" className="flex-1">
-                가입하기
+              <Button size="sm" className="flex-1" onClick={onSignupClick}>
+                문의하기
               </Button>
             </div>
           </div>

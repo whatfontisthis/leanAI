@@ -47,22 +47,12 @@ export function PricingSection() {
     return () => ctx.revert();
   }, []);
 
-  const plans = [
-    {
-      name: "스타터",
-      price: "문의",
-      features: ["프로세스 진단", "기본 리포트"],
-    },
-    {
-      name: "프로페셔널",
-      price: "문의",
-      features: ["프로세스 진단", "AI 솔루션 설계", "팀 교육"],
-    },
-    {
-      name: "엔터프라이즈",
-      price: "문의",
-      features: ["전체 서비스", "맞춤형 솔루션", "지속 지원"],
-    },
+  const features = [
+    "프로세스 진단",
+    "AI 솔루션 설계",
+    "팀 교육",
+    "맞춤형 솔루션",
+    "지속 지원",
   ];
 
   return (
@@ -71,23 +61,24 @@ export function PricingSection() {
         <h2 ref={titleRef} className="mb-12 text-center text-3xl font-bold text-foreground">
           가격
         </h2>
-        <div ref={cardsRef} className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {plans.map((plan, index) => (
-            <Card key={index} className="p-6">
-              <h3 className="mb-2 text-xl font-semibold text-foreground">
-                {plan.name}
-              </h3>
-              <div className="mb-4 text-2xl font-bold text-accent">{plan.price}</div>
-              <ul className="mb-6 space-y-2">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="text-muted">
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Button className="w-full">문의하기</Button>
-            </Card>
-          ))}
+        <div ref={cardsRef} className="flex justify-center">
+          <Card className="p-8 max-w-lg w-full">
+            <div className="text-center mb-6">
+              <div className="mb-2 text-3xl font-bold text-accent">무료</div>
+              <div className="mb-4 text-sm text-muted">
+                현재 챔바 할인으로 무료 진행
+              </div>
+            </div>
+            <ul className="mb-8 space-y-3">
+              {features.map((feature, featureIndex) => (
+                <li key={featureIndex} className="flex items-center justify-center text-muted">
+                  <span className="mr-2 text-accent">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Button className="w-full" size="lg">문의하기</Button>
+          </Card>
         </div>
       </div>
     </section>

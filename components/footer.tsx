@@ -32,17 +32,17 @@ export function Footer() {
                 <Link href="#about">회사소개</Link>
               </li>
               <li>
-                <Link href="#case-studies">사례연구</Link>
+                <Link href="#case-studies">성공사례</Link>
               </li>
             </ul>
           </div>
           <div>
             <h4 className="mb-4 text-sm font-semibold text-foreground">연락처</h4>
-            <p className="text-sm text-muted">contact@leanflow.kr</p>
+            <p className="text-sm text-muted">woobin.dev@gmail.com</p>
           </div>
         </div>
         <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted">
-          <p>© 2024 LeanAI. All rights reserved.</p>
+          <p>© 2025 LeanAI. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -12,7 +12,7 @@ import { Footer } from "@/components/footer";
 
 const sectionDividerStyle: React.CSSProperties = {
   borderStyle: 'solid',
-  borderWidth: '3px 0px 0px 0px',
+  borderWidth: '1px 0px 0px 0px',
   borderColor: '#034ea2',
   color: '#808080',
   lineHeight: '25.6px',
@@ -21,7 +21,7 @@ const sectionDividerStyle: React.CSSProperties = {
 };
 
 const spacerStyle: React.CSSProperties = {
-  height: '40px'
+  height: '140px'
 };
 
 const contentWrapperStyle: React.CSSProperties = {
@@ -35,53 +35,47 @@ export default function Home() {
     <main>
       <PageWrapper>
         <Navbar />
+        
         <div style={contentWrapperStyle}>
           <HeroSection />
         </div>
-        <div style={spacerStyle} />
+        
         <hr style={sectionDividerStyle} />
         <div style={spacerStyle} />
         <div style={contentWrapperStyle}>
           <FeaturesSection />
         </div>
         <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
-        <div style={spacerStyle} />
         <div style={contentWrapperStyle}>
           <ProcessSection />
         </div>
         <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
-        <div style={spacerStyle} />
         <div style={contentWrapperStyle}>
           <CaseStudies />
         </div>
+        
+        
+        
+        <MarqueeTestimonials />
+        
         <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
-        <div style={spacerStyle} />
-        <div style={contentWrapperStyle}>
-          <MarqueeTestimonials />
-        </div>
-        <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
-        <div style={spacerStyle} />
+        
+        
         <div style={contentWrapperStyle}>
           <PricingSection />
         </div>
+        
         <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
+        
         <div style={spacerStyle} />
         <div style={contentWrapperStyle}>
           <FAQSection />
         </div>
         <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
-        <div style={spacerStyle} />
+        
         <div style={contentWrapperStyle}>
           <AboutSection />
         </div>
-        <div style={spacerStyle} />
-        <hr style={sectionDividerStyle} />
         <div style={spacerStyle} />
         <Footer />
       </PageWrapper>

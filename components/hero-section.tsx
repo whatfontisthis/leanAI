@@ -90,7 +90,7 @@ export function HeroSection() {
         <div ref={buttonsRef} className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button size="lg">무료 상담 예약하기</Button>
           <Button size="lg" variant="outline">
-            성공 사례
+            성공사례
           </Button>
         </div>
         
