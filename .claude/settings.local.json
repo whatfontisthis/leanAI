@@ -4,7 +4,9 @@
       "Bash(cat:*)",
       "Bash(tree:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nSwitch to Vercel deployment with secure API routes\n\n- Remove static export configuration\n- Remove GitHub Pages basePath\n- Add secure API route for OpenAI inquiry refinement\n- Update signup modal to use server-side API\n- Implement scrollbar shift prevention for all modals\n- Redesign pricing section with 3-card layout\n- Add AI-powered inquiry refinement feature\n- Update case studies with metrics display\n- Improve animations across all sections\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nSwitch to Vercel deployment with secure API routes\n\n- Remove static export configuration\n- Remove GitHub Pages basePath\n- Add secure API route for OpenAI inquiry refinement\n- Update signup modal to use server-side API\n- Implement scrollbar shift prevention for all modals\n- Redesign pricing section with 3-card layout\n- Add AI-powered inquiry refinement feature\n- Update case studies with metrics display\n- Improve animations across all sections\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nImprove AI inquiry refinement feature\n\n- Increase AI로 다듬기 button size (sm → default)\n- Add horizontal padding to button (px-6)\n- Update AI prompt to focus on AX transformation context\n- Prompt now considers AI adoption, process automation, and organizational innovation\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

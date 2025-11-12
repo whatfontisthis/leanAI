@@ -305,10 +305,10 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
+                size="default"
                 onClick={handleRefineInquiry}
                 disabled={isRefining || !formData.inquiry.trim()}
-                className="text-xs"
+                className="text-sm px-6"
               >
                 {isRefining ? "다듬는 중..." : "✨ AI로 다듬기"}
               </Button>
