@@ -5,7 +5,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-export function PricingSection() {
+interface PricingSectionProps {
+  onInquiryClick: () => void;
+}
+
+export function PricingSection({ onInquiryClick }: PricingSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -103,7 +107,7 @@ export function PricingSection() {
               </ul>
             </div>
 
-            <Button className="w-full" size="lg" variant="outline">
+            <Button className="w-full" size="lg" variant="outline" onClick={onInquiryClick}>
               문의하기
             </Button>
           </Card>
@@ -131,7 +135,7 @@ export function PricingSection() {
                 </p>
               </div>
             </div>
-            <Button className="w-full bg-white text-accent hover:bg-white/90" size="lg">
+            <Button className="w-full bg-white text-accent hover:bg-white/90" size="lg" onClick={onInquiryClick}>
               지금 신청하기
             </Button>
           </Card>
@@ -161,7 +165,7 @@ export function PricingSection() {
               </ul>
             </div>
 
-            <Button className="w-full" size="lg">
+            <Button className="w-full" size="lg" onClick={onInquiryClick}>
               문의하기
             </Button>
           </Card>

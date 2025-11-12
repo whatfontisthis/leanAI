@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { MobileMenu } from "./mobile-menu";
 import { Logo } from "./logo";
 import { LoginModal } from "./login-modal";
-import { SignupModal } from "./signup-modal";
 
-export function Navbar() {
+interface NavbarProps {
+  onInquiryClick: () => void;
+}
+
+export function Navbar({ onInquiryClick }: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 z-[60] w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -39,14 +41,13 @@ export function Navbar() {
           <Button variant="outline" size="sm" onClick={() => setIsLoginModalOpen(true)}>
             로그인
           </Button>
-          <Button size="sm" onClick={() => setIsSignupModalOpen(true)}>문의하기</Button>
+          <Button size="sm" onClick={onInquiryClick}>문의하기</Button>
         </div>
-        <MobileMenu 
-          onLoginClick={() => setIsLoginModalOpen(true)} 
-          onSignupClick={() => setIsSignupModalOpen(true)}
+        <MobileMenu
+          onLoginClick={() => setIsLoginModalOpen(true)}
+          onSignupClick={onInquiryClick}
         />
         <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-        <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
       </div>
     </nav>
   );

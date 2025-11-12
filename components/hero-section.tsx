@@ -6,7 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { AnimatedHeadline } from "./animated-headline";
 import { gsap } from "@/lib/gsap";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  onInquiryClick: () => void;
+}
+
+export function HeroSection({ onInquiryClick }: HeroSectionProps) {
   const badgeRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -88,9 +92,9 @@ export function HeroSection() {
           AI 실전 도입부터 정착까지, 조직의 변화가 있을때 까지 함께하겠습니다.
         </p>
         <div ref={buttonsRef} className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button size="lg">무료 상담 예약하기</Button>
-          <Button size="lg" variant="outline">
-            성공사례
+          <Button size="lg" onClick={onInquiryClick}>무료 상담 예약하기</Button>
+          <Button size="lg" variant="outline" asChild>
+            <a href="#case-studies">성공사례</a>
           </Button>
         </div>
         
