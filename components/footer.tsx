@@ -38,7 +38,12 @@ export function Footer() {
           </div>
           <div>
             <h4 className="mb-4 text-sm font-semibold text-foreground">연락처</h4>
-            <p className="text-sm text-muted">woobin.dev@gmail.com</p>
+            <p className="text-sm text-muted mb-2">대표 이우빈</p>
+            <p className="text-sm text-muted">
+              <a href="mailto:woobina@gmail.com" className="hover:text-accent transition-colors">
+                woobina@gmail.com
+              </a>
+            </p>
           </div>
         </div>
         <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted">

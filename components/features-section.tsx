@@ -1,86 +1,83 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export function FeaturesSection() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([titleRef.current, ...(cardsRef.current?.children || [])], {
-        opacity: 0,
-        y: 40,
-      });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
 
-      // Animate title
-      gsap.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      // Animate cards together (no stagger)
-      gsap.to(cardsRef.current?.children || [], {
-        opacity: 1,
-        y: 0,
-        duration: 1.0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => observer.disconnect();
   }, []);
 
   const features = [
     {
-      title: "프로세스 진단",
+      title: "AX Fundamental",
+      price: "100만원",
+      value: "반복 업무 제거",
+      target: "AI/자동화 경험이 적고 즉각적 효율화가 필요한 스타트업",
       description:
-        " 문제와, 업무 흐름을 분석해 반복되는 작업, 비효율한 단계, AI로 자동화 및 의사결정 할 수 있는 영역을 찾아냅니다. 데이터 기반의 개선 기회를 2-3주 내 상세 리포트로 제공합니다.",
+        "Google Workspace 기반 업무 자동화, Slack 알림/봇 구축, Notion 데이터베이스 자동 업데이트, 기본 워크플로우 자동화 (n8n 3-5개 시나리오), 월 1회 유지보수",
     },
     {
-      title: "AI 자동화 설계 & 구현",
+      title: "AX Leap",
+      price: "250만원",
+      value: "AI로 업무 재설계",
+      target: "자동화 경험이 있고 AI로 업무 고도화를 원하는 스타트업",
       description:
-        "비즈니스 목표와 팀의 상황을 고려해 맞춤형 AI 도입 솔루션을 설계합니다. 파일럿부터 전면 확장까지 단계적으로 진행합니다.",
+        "LLM 기반 지능형 자동화, 복잡한 멀티스텝 워크플로우 (n8n 10+ 시나리오), 커스텀 AI 에이전트 구축, Notion AI 통합, 주 1회 최적화 미팅",
     },
     {
-      title: "조직 문화 & 역량 강화",
+      title: "AX Breakthrough",
+      price: "맞춤형",
+      value: "AI로 비즈니스 모델 혁신",
+      target: "복잡한 비즈니스 프로세스를 가지며 AI를 핵심 경쟁력으로 만들고 싶은 기업",
       description:
-        "아무리 좋은 툴도 문화 없이 정착되지 않습니다. 리더쉽, 실무진 맞춤형 워크숍, 온라인 교육을 통해 팀이 자연스럽게 새로운 방식을 수용하고 주도적으로 활용하도록 지원합니다.",
+        "완전 맞춤형 AI 솔루션 설계 및 구축, 다중 LLM 통합 (GPT, Claude 등), RAG 기반 기업 전용 지식 시스템",
     },
   ];
 
   return (
     <section ref={sectionRef} id="services" className="py-20">
       <div className="container mx-auto px-4">
-        <h2 ref={titleRef} className="mb-12 text-center text-3xl font-bold text-foreground">
+        <h2 className={`mb-12 text-center text-3xl font-bold text-foreground ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           서비스
         </h2>
-        <div ref={cardsRef} className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {features.map((feature, index) => (
-            <Card key={index} className="group relative overflow-hidden transition-all hover:shadow-md hover:-translate-y-1">
-              <div className="bg-accent px-6 py-1">
-                <h3 className="text-center text-lg font-light text-white">
+            <Card 
+              key={index} 
+              className={`group relative overflow-hidden transition-all hover:shadow-md hover:-translate-y-1 ${isVisible ? `fade-in-stagger-${index}` : "opacity-0"}`}
+            >
+              <div className="bg-accent px-6 py-3">
+                <h3 className="text-center text-lg font-bold text-white mb-1">
                   {feature.title}
                 </h3>
+                <p className="text-center text-sm text-white/90">{feature.price}</p>
               </div>
               <div className="bg-background px-6 py-6">
-                <p className="text-muted leading-relaxed">{feature.description}</p>
+                <div className="mb-3">
+                  <span className="inline-block bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                    {feature.value}
+                  </span>
+                  <p className="text-xs text-muted mt-2">{feature.target}</p>
+                </div>
+                <p className="text-muted leading-relaxed text-sm">{feature.description}</p>
               </div>
             </Card>
           ))}

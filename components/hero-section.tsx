@@ -1,97 +1,36 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedHeadline } from "./animated-headline";
-import { gsap } from "@/lib/gsap";
 
 interface HeroSectionProps {
   onInquiryClick: () => void;
 }
 
 export function HeroSection({ onInquiryClick }: HeroSectionProps) {
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const bottomTextRef = useRef<HTMLParagraphElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      // Set initial states
-      gsap.set([badgeRef.current, headlineRef.current, subtitleRef.current, buttonsRef.current, bottomTextRef.current], {
-        opacity: 0,
-        y: 20,
-      });
-
-      // Animate in sequence
-      tl.to(badgeRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      })
-        .to(
-          headlineRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .to(
-          subtitleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .to(
-          buttonsRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .to(
-          bottomTextRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        );
-    });
-
-    return () => ctx.revert();
+  useEffect(() => {
+    setIsVisible(true); // Hero section appears immediately
   }, []);
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center pt-16">
+    <section ref={sectionRef} className="relative flex min-h-screen items-center justify-center pt-16">
       <div className="container mx-auto px-4 py-20 text-center">
-        <div ref={badgeRef}>
+        <div className={isVisible ? "animate-fade-in" : "opacity-0"}>
           <Badge className="mb-6 text-sm px-4 py-1.5">AX 파트너십</Badge>
         </div>
-        <div ref={headlineRef}>
+        <div className={isVisible ? "animate-fade-in-delay-1" : "opacity-0"}>
           <AnimatedHeadline />
         </div>
-        <p ref={subtitleRef} className="mx-auto mb-8 max-w-2xl font-medium text-muted">
-          AI 실전 도입부터 정착까지, 조직의 변화가 있을때 까지 함께하겠습니다.
+        <p className={`mx-auto mb-8 max-w-2xl font-medium text-muted ${isVisible ? "animate-fade-in-delay-2" : "opacity-0"}`}>
+          바로 쓰는 실무 중심 AI, 가벼운 AX<br/>
+          10인 미만 스타트업을 위한 AI Transformation 파트너
         </p>
-        <div ref={buttonsRef} className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className={`flex flex-col items-center justify-center gap-4 sm:flex-row ${isVisible ? "animate-fade-in-delay-3" : "opacity-0"}`}>
           <Button size="lg" onClick={onInquiryClick}>무료 상담 예약하기</Button>
           <Button size="lg" variant="outline" asChild>
             <a href="#case-studies">성공사례</a>

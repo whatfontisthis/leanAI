@@ -1,55 +1,33 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export function FAQSection() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const accordionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([titleRef.current, accordionRef.current], {
-        opacity: 0,
-        y: 40,
-      });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
 
-      // Animate title
-      gsap.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      // Animate accordion
-      gsap.to(accordionRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => observer.disconnect();
   }, []);
 
   const faqs = [
@@ -83,10 +61,10 @@ export function FAQSection() {
   return (
     <section ref={sectionRef} className="bg-surface py-20">
       <div className="container mx-auto px-4">
-        <h2 ref={titleRef} className="mb-12 text-center text-3xl font-bold text-foreground">
+        <h2 className={`mb-12 text-center text-3xl font-bold text-foreground ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           자주 묻는 질문
         </h2>
-        <div ref={accordionRef} className="mx-auto max-w-2xl">
+        <div className={`mx-auto max-w-2xl ${isVisible ? "animate-fade-in-delay-1" : "opacity-0"}`}>
           <Accordion type="single" collapsible>
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>

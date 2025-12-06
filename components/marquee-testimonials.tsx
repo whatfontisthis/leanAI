@@ -1,43 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+// Mask middle character(s) in name
+const maskName = (name: string) => {
+  if (name.length <= 2) return name;
+  const firstChar = name[0];
+  const lastChar = name[name.length - 1];
+  const middleLength = name.length - 2;
+  const masked = '*'.repeat(middleLength);
+  return `${firstChar}${masked}${lastChar}`;
+};
 
 export function MarqueeTestimonials() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
-
-  // Mask middle character(s) in name
-  const maskName = (name: string) => {
-    if (name.length <= 2) return name;
-    const firstChar = name[0];
-    const lastChar = name[name.length - 1];
-    const middleLength = name.length - 2;
-    const masked = '*'.repeat(middleLength);
-    return `${firstChar}${masked}${lastChar}`;
-  };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Set initial state
-      gsap.set(marqueeRef.current, {
-        opacity: 0,
-      });
-
-      // Animate marquee container
-      gsap.to(marqueeRef.current, {
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const testimonials = [
     {
@@ -77,9 +50,9 @@ export function MarqueeTestimonials() {
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section ref={sectionRef} className="py-12">
-      <div className="overflow-hidden w-full">
-        <div ref={marqueeRef} className="flex animate-marquee-left gap-6 w-fit">
+    <section className="py-12 overflow-hidden">
+      <div className="overflow-hidden w-full max-w-full">
+        <div className="flex animate-marquee-left gap-6 w-fit">
           {duplicatedTestimonials.map((testimonial, index) => (
             <div
               key={index}

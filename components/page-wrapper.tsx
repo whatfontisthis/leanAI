@@ -7,6 +7,6 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children }: PageWrapperProps) {
-  return <div className="min-h-screen">{children}</div>;
+  return <div className="min-h-screen overflow-x-hidden w-full">{children}</div>;
 }
 

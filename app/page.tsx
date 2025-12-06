@@ -21,7 +21,8 @@ const sectionDividerStyle: React.CSSProperties = {
   color: '#808080',
   lineHeight: '25.6px',
   margin: '0 auto',
-  width: '1000px'
+  maxWidth: '1000px',
+  width: '100%'
 };
 
 const spacerStyle: React.CSSProperties = {
@@ -41,7 +42,7 @@ export default function Home() {
   const closeInquiryModal = () => setIsInquiryModalOpen(false);
 
   return (
-    <main>
+    <main className="overflow-x-hidden w-full">
       <PageWrapper>
         <Navbar onInquiryClick={openInquiryModal} />
 
